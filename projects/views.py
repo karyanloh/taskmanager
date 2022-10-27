@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from .models import Project
 from django.contrib.auth.decorators import login_required
 from .forms import CreateFrom
 
-# Create your views here.
+
 @login_required
 def list_projects(request):
     projects = Project.objects.filter(owner=request.user)
