@@ -10,9 +10,7 @@ Project List
 </header>
 <div>
     <h1>My Projects</h1>
-    {% if list_project|length == 0 %}
-    <p>You are not assigned to any projects</p>
-    {% else %}
+    {% if list_project %}
     <table>
         <thead>
             <th>Name</th>
@@ -24,11 +22,13 @@ Project List
                 <td>
                     <a href="{% url 'show_project' project.id %}">{{ project.name }}</a>
                 </td>
-                <td>{{ project.task.all|length}}</td>
+                <td>{{ project.tasks.all|length}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>You are not assigned to any projects</p>
     {% endif %}
 </div>
 {% endblock content %}

@@ -12,7 +12,9 @@ Project Details
     <h1>{{ project_details.name }}</h1>
     <p>{{ project_details.description }}</p>
     <h2>Tasks</h2>
-    {% if project_details.tasks|length > 0 %}
+    {% if project_details is None %}
+    <p>This project has no tasks</p>
+    {% else %}
     <table>
         <thead>
             <th>Name</th>
@@ -31,8 +33,6 @@ Project Details
             </tr>
         </tbody>
     </table>
-    {% else %}
-    <p>This project has no tasks</p>
     {% endif %}
 </div>
 {% endblock content %}
