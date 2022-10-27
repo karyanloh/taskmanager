@@ -12,27 +12,29 @@ Project Details
     <h1>{{ project_details.name }}</h1>
     <p>{{ project_details.description }}</p>
     <h2>Tasks</h2>
-    {% if project_details is None %}
-    <p>This project has no tasks</p>
-    {% else %}
+    {% if project_details.tasks.all %}
     <table>
         <thead>
             <th>Name</th>
             <th>Assignee</th>
             <th>Start date</th>
-            <th>Due Date</th>
+            <th>Due date</th>
             <th>Is completed</th>
         </thead>
         <tbody>
+            {% for task in project_details.tasks.all %}
             <tr>
-                <td>{{ project_details.name }}</td>
-                <td>{{ project_details.assignee }}</td>
-                <td>{{ project_details.start_date }}</td>
-                <td>{{ project_details.due_date }}</td>
-                <td>{{ project_details.is_completed|yesno }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.assignee }}</td>
+                <td>{{ task.start_date }}</td>
+                <td>{{ task.due_date }}</td>
+                <td>{{ task.is_completed|yesno }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>This project has no tasks</p>
     {% endif %}
 </div>
 {% endblock content %}
