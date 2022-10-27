@@ -3,11 +3,16 @@
 Project List
 {% endblock title %}
 {% block content %}
+<header>
+    <nav>
+        <a href="{% url 'create_project' %}">Create new project</a>
+    </nav>
+</header>
 <div>
     <h1>My Projects</h1>
     {% if project_list|length == 0 %}
     <p>You are not assigned to any projects</p>
-    {% endif %}
+    {% else %}
     <table>
         <thead>
             <th>Name</th>
@@ -16,11 +21,14 @@ Project List
         <tbody>
             {% for project in list_project %}
             <tr>
-                <td>{{ project.name }}</td>
-                <td>{{ project.task|default:"" }}</td>
+                <td>
+                    <a href="{% url 'show_project' project.id %}">{{ project.name }}</a>
+                </td>
+                <td>{{ project.task.all|length}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 </div>
 {% endblock content %}
